@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="./src/main/java.pojo.CopInformationMapper" >
+  <resultMap id="BaseResultMap" type="./src/main/java.pojo.CopInformation" >
+    <constructor >
+      <idArg column="cop_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="cop_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cop_number" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="cop_activity" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="cop_introduce" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cop_image" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cop_id, cop_name, cop_number, cop_activity, cop_introduce, cop_image
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from Cop_information
+    where cop_id = #{copId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Cop_information
+    where cop_id = #{copId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="./src/main/java.pojo.CopInformation" >
+    insert into Cop_information (cop_id, cop_name, cop_number, 
+      cop_activity, cop_introduce, cop_image
+      )
+    values (#{copId,jdbcType=INTEGER}, #{copName,jdbcType=VARCHAR}, #{copNumber,jdbcType=TINYINT}, 
+      #{copActivity,jdbcType=TINYINT}, #{copIntroduce,jdbcType=VARCHAR}, #{copImage,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="./src/main/java.pojo.CopInformation" >
+    insert into Cop_information
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="copId != null" >
+        cop_id,
+      </if>
+      <if test="copName != null" >
+        cop_name,
+      </if>
+      <if test="copNumber != null" >
+        cop_number,
+      </if>
+      <if test="copActivity != null" >
+        cop_activity,
+      </if>
+      <if test="copIntroduce != null" >
+        cop_introduce,
+      </if>
+      <if test="copImage != null" >
+        cop_image,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="copId != null" >
+        #{copId,jdbcType=INTEGER},
+      </if>
+      <if test="copName != null" >
+        #{copName,jdbcType=VARCHAR},
+      </if>
+      <if test="copNumber != null" >
+        #{copNumber,jdbcType=TINYINT},
+      </if>
+      <if test="copActivity != null" >
+        #{copActivity,jdbcType=TINYINT},
+      </if>
+      <if test="copIntroduce != null" >
+        #{copIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="copImage != null" >
+        #{copImage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="./src/main/java.pojo.CopInformation" >
+    update Cop_information
+    <set >
+      <if test="copName != null" >
+        cop_name = #{copName,jdbcType=VARCHAR},
+      </if>
+      <if test="copNumber != null" >
+        cop_number = #{copNumber,jdbcType=TINYINT},
+      </if>
+      <if test="copActivity != null" >
+        cop_activity = #{copActivity,jdbcType=TINYINT},
+      </if>
+      <if test="copIntroduce != null" >
+        cop_introduce = #{copIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="copImage != null" >
+        cop_image = #{copImage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cop_id = #{copId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="./src/main/java.pojo.CopInformation" >
+    update Cop_information
+    set cop_name = #{copName,jdbcType=VARCHAR},
+      cop_number = #{copNumber,jdbcType=TINYINT},
+      cop_activity = #{copActivity,jdbcType=TINYINT},
+      cop_introduce = #{copIntroduce,jdbcType=VARCHAR},
+      cop_image = #{copImage,jdbcType=VARCHAR}
+    where cop_id = #{copId,jdbcType=INTEGER}
+  </update>
+</mapper>

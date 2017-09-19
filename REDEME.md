@@ -1,2 +1,3 @@
-# 类似淘宝JD的电商网站
-第一个连手的项目，类似淘宝JD的电商网站
+School_Program
+
+first program
