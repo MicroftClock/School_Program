@@ -1,50 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="./src/main/java.pojo.UserInformationMapper" >
-  <resultMap id="BaseResultMap" type="./src/main/java.pojo.UserInformation" >
+<mapper namespace="dao.UserInformationMapper" >
+  <resultMap id="BaseResultMap" type="pojo.UserInformation" >
     <constructor >
-      <idArg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="Sex" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <idArg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="sex" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="school_id" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="phone" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="major" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="activity_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="activity_id" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="corporation_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    user_id, username, Sex, school_id, phone, major, activity_id, corporation_id, create_time, 
-    update_time
+    username, sex, school_id, major, activity_id, corporation_id, create_time, update_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from User_Information
-    where user_id = #{userId,jdbcType=INTEGER}
+    where username = #{username,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from User_Information
-    where user_id = #{userId,jdbcType=INTEGER}
+    where username = #{username,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="./src/main/java.pojo.UserInformation" >
-    insert into User_Information (user_id, username, Sex, 
-      school_id, phone, major, 
-      activity_id, corporation_id, create_time, 
-      update_time)
-    values (#{userId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
-      #{schoolId,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, 
-      #{activityId,jdbcType=INTEGER}, #{corporationId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="pojo.UserInformation" >
+    insert into User_Information (username, sex, school_id,
+      major, activity_id, corporation_id, 
+      create_time, update_time)
+    values (#{username,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{schoolId,jdbcType=VARCHAR}, 
+      #{major,jdbcType=VARCHAR}, #{activityId,jdbcType=VARCHAR}, #{corporationId,jdbcType=INTEGER}, 
+     now(), now())
   </insert>
-  <insert id="insertSelective" parameterType="./src/main/java.pojo.UserInformation" >
+  <insert id="insertSelective" parameterType="pojo.UserInformation" >
     insert into User_Information
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        user_id,
-      </if>
       <if test="username != null" >
         username,
       </if>
@@ -53,9 +45,6 @@
       </if>
       <if test="schoolId != null" >
         school_id,
-      </if>
-      <if test="phone != null" >
-        phone,
       </if>
       <if test="major != null" >
         major,
@@ -74,9 +63,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
-      </if>
       <if test="username != null" >
         #{username,jdbcType=VARCHAR},
       </if>
@@ -86,46 +72,37 @@
       <if test="schoolId != null" >
         #{schoolId,jdbcType=VARCHAR},
       </if>
-      <if test="phone != null" >
-        #{phone,jdbcType=VARCHAR},
-      </if>
       <if test="major != null" >
         #{major,jdbcType=VARCHAR},
       </if>
       <if test="activityId != null" >
-        #{activityId,jdbcType=INTEGER},
+        #{activityId,jdbcType=VARCHAR},
       </if>
       <if test="corporationId != null" >
         #{corporationId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
       <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="./src/main/java.pojo.UserInformation" >
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.UserInformation" >
     update User_Information
     <set >
-      <if test="username != null" >
-        username = #{username,jdbcType=VARCHAR},
-      </if>
       <if test="sex != null" >
         Sex = #{sex,jdbcType=INTEGER},
       </if>
       <if test="schoolId != null" >
         school_id = #{schoolId,jdbcType=VARCHAR},
       </if>
-      <if test="phone != null" >
-        phone = #{phone,jdbcType=VARCHAR},
-      </if>
       <if test="major != null" >
         major = #{major,jdbcType=VARCHAR},
       </if>
       <if test="activityId != null" >
-        activity_id = #{activityId,jdbcType=INTEGER},
+        activity_id = #{activityId,jdbcType=VARCHAR},
       </if>
       <if test="corporationId != null" >
         corporation_id = #{corporationId,jdbcType=INTEGER},
@@ -134,22 +111,20 @@
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        update_time = now(),
       </if>
     </set>
-    where user_id = #{userId,jdbcType=INTEGER}
+    where username = #{username,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="./src/main/java.pojo.UserInformation" >
+  <update id="updateByPrimaryKey" parameterType="pojo.UserInformation" >
     update User_Information
-    set username = #{username,jdbcType=VARCHAR},
-      Sex = #{sex,jdbcType=INTEGER},
+    set sex = #{sex,jdbcType=INTEGER},
       school_id = #{schoolId,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
       major = #{major,jdbcType=VARCHAR},
-      activity_id = #{activityId,jdbcType=INTEGER},
+      activity_id = #{activityId,jdbcType=VARCHAR},
       corporation_id = #{corporationId,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where user_id = #{userId,jdbcType=INTEGER}
+      update_time = now()
+    where username = #{username,jdbcType=VARCHAR}
   </update>
 </mapper>

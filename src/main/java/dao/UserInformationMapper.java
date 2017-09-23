@@ -1,15 +1,15 @@
-package ./src/main/java.pojo;
+package dao;
 
-import ./src/main/java.pojo.UserInformation;
+import pojo.UserInformation;
 
 public interface UserInformationMapper {
-    int deleteByPrimaryKey(Integer userId);
+    int deleteByPrimaryKey(String username);
 
     int insert(UserInformation record);
 
     int insertSelective(UserInformation record);
 
-    UserInformation selectByPrimaryKey(Integer userId);
+    UserInformation selectByPrimaryKey(String username);
 
     int updateByPrimaryKeySelective(UserInformation record);
 

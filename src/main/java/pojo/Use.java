@@ -1,4 +1,4 @@
-package ./src/main/java.pojo;
+package pojo;
 
 import java.util.Date;
 
@@ -9,16 +9,22 @@ public class Use {
 
     private String password;
 
+    private String email;
+
+    private String phone;
+
     private Integer role;
 
     private Date createTime;
 
     private Date updateTime;
 
-    public Use(Integer id, String username, String password, Integer role, Date createTime, Date updateTime) {
+    public Use(Integer id, String username, String password, String email, String phone, Integer role, Date createTime, Date updateTime) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.email = email;
+        this.phone = phone;
         this.role = role;
         this.createTime = createTime;
         this.updateTime = updateTime;
@@ -50,6 +56,22 @@ public class Use {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
     }
 
     public Integer getRole() {

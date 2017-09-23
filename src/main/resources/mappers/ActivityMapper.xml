@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="./src/main/java.pojo.ActivityMapper" >
-  <resultMap id="BaseResultMap" type="./src/main/java.pojo.Activity" >
+<mapper namespace="dao.ActivityMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Activity" >
     <constructor >
       <idArg column="activity_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="category_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="activity_name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="introduce" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="main_images" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="sub_images" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="count" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="status" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="activity_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    activity_id, category_id, name, introduce, main_images, sub_images, count, status, 
-    create_time, update_time
+    activity_id, category_id, activity_name, introduce, main_images, sub_images, activity_count, 
+    status, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -29,17 +29,17 @@
     delete from Show_Activity
     where activity_id = #{activityId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="./src/main/java.pojo.Activity" >
-    insert into Show_Activity (activity_id, category_id, name, 
+  <insert id="insert" parameterType="pojo.Activity" >
+    insert into Show_Activity (activity_id, category_id, activity_name, 
       introduce, main_images, sub_images, 
-      count, status, create_time, 
+      activity_count, status, create_time, 
       update_time)
-    values (#{activityId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+    values (#{activityId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{activityName,jdbcType=VARCHAR}, 
       #{introduce,jdbcType=VARCHAR}, #{mainImages,jdbcType=VARCHAR}, #{subImages,jdbcType=VARCHAR}, 
-      #{count,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{activityCount,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, now(),
+      now())
   </insert>
-  <insert id="insertSelective" parameterType="./src/main/java.pojo.Activity" >
+  <insert id="insertSelective" parameterType="pojo.Activity" >
     insert into Show_Activity
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="activityId != null" >
@@ -48,8 +48,8 @@
       <if test="categoryId != null" >
         category_id,
       </if>
-      <if test="name != null" >
-        name,
+      <if test="activityName != null" >
+        activity_name,
       </if>
       <if test="introduce != null" >
         introduce,
@@ -60,8 +60,8 @@
       <if test="subImages != null" >
         sub_images,
       </if>
-      <if test="count != null" >
-        count,
+      <if test="activityCount != null" >
+        activity_count,
       </if>
       <if test="status != null" >
         status,
@@ -80,8 +80,8 @@
       <if test="categoryId != null" >
         #{categoryId,jdbcType=INTEGER},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+      <if test="activityName != null" >
+        #{activityName,jdbcType=VARCHAR},
       </if>
       <if test="introduce != null" >
         #{introduce,jdbcType=VARCHAR},
@@ -92,28 +92,28 @@
       <if test="subImages != null" >
         #{subImages,jdbcType=VARCHAR},
       </if>
-      <if test="count != null" >
-        #{count,jdbcType=INTEGER},
+      <if test="activityCount != null" >
+        #{activityCount,jdbcType=INTEGER},
       </if>
       <if test="status != null" >
-        #{status,jdbcType=TINYINT},
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
       <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="./src/main/java.pojo.Activity" >
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Activity" >
     update Show_Activity
     <set >
       <if test="categoryId != null" >
         category_id = #{categoryId,jdbcType=INTEGER},
       </if>
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
+      <if test="activityName != null" >
+        activity_name = #{activityName,jdbcType=VARCHAR},
       </if>
       <if test="introduce != null" >
         introduce = #{introduce,jdbcType=VARCHAR},
@@ -124,32 +124,32 @@
       <if test="subImages != null" >
         sub_images = #{subImages,jdbcType=VARCHAR},
       </if>
-      <if test="count != null" >
-        count = #{count,jdbcType=INTEGER},
+      <if test="activityCount != null" >
+        activity_count = #{activityCount,jdbcType=INTEGER},
       </if>
       <if test="status != null" >
-        status = #{status,jdbcType=TINYINT},
+        status = #{status,jdbcType=INTEGER},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        update_time = now(),
       </if>
     </set>
     where activity_id = #{activityId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="./src/main/java.pojo.Activity" >
+  <update id="updateByPrimaryKey" parameterType="pojo.Activity" >
     update Show_Activity
     set category_id = #{categoryId,jdbcType=INTEGER},
-      name = #{name,jdbcType=VARCHAR},
+      activity_name = #{activityName,jdbcType=VARCHAR},
       introduce = #{introduce,jdbcType=VARCHAR},
       main_images = #{mainImages,jdbcType=VARCHAR},
       sub_images = #{subImages,jdbcType=VARCHAR},
-      count = #{count,jdbcType=INTEGER},
-      status = #{status,jdbcType=TINYINT},
+      activity_count = #{activityCount,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time =now()
     where activity_id = #{activityId,jdbcType=INTEGER}
   </update>
 </mapper>

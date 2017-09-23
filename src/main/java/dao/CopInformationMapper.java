@@ -1,6 +1,6 @@
-package ./src/main/java.pojo;
+package dao;
 
-import ./src/main/java.pojo.CopInformation;
+import pojo.CopInformation;
 
 public interface CopInformationMapper {
     int deleteByPrimaryKey(Integer copId);

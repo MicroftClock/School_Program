@@ -1,6 +1,6 @@
-package ./src/main/java.pojo;
+package dao;
 
-import ./src/main/java.pojo.Activity;
+import pojo.Activity;
 
 public interface ActivityMapper {
     int deleteByPrimaryKey(Integer activityId);

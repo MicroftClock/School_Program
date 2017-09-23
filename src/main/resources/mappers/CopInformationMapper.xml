@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="./src/main/java.pojo.CopInformationMapper" >
-  <resultMap id="BaseResultMap" type="./src/main/java.pojo.CopInformation" >
+<mapper namespace="dao.CopInformationMapper" >
+  <resultMap id="BaseResultMap" type="pojo.CopInformation" >
     <constructor >
       <idArg column="cop_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="cop_name" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -9,10 +9,13 @@
       <arg column="cop_activity" jdbcType="TINYINT" javaType="java.lang.Byte" />
       <arg column="cop_introduce" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="cop_image" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    cop_id, cop_name, cop_number, cop_activity, cop_introduce, cop_image
+    cop_id, cop_name, cop_number, cop_activity, cop_introduce, cop_image, create_time, 
+    update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,15 +27,15 @@
     delete from Cop_information
     where cop_id = #{copId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="./src/main/java.pojo.CopInformation" >
+  <insert id="insert" parameterType="pojo.CopInformation" >
     insert into Cop_information (cop_id, cop_name, cop_number, 
-      cop_activity, cop_introduce, cop_image
-      )
+      cop_activity, cop_introduce, cop_image, 
+      create_time, update_time)
     values (#{copId,jdbcType=INTEGER}, #{copName,jdbcType=VARCHAR}, #{copNumber,jdbcType=TINYINT}, 
-      #{copActivity,jdbcType=TINYINT}, #{copIntroduce,jdbcType=VARCHAR}, #{copImage,jdbcType=VARCHAR}
-      )
+      #{copActivity,jdbcType=TINYINT}, #{copIntroduce,jdbcType=VARCHAR}, #{copImage,jdbcType=VARCHAR}, 
+     now(), now())
   </insert>
-  <insert id="insertSelective" parameterType="./src/main/java.pojo.CopInformation" >
+  <insert id="insertSelective" parameterType="pojo.CopInformation" >
     insert into Cop_information
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="copId != null" >
@@ -52,6 +55,12 @@
       </if>
       <if test="copImage != null" >
         cop_image,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -73,9 +82,15 @@
       <if test="copImage != null" >
         #{copImage,jdbcType=VARCHAR},
       </if>
+      <if test="createTime != null" >
+        now(),
+      </if>
+      <if test="updateTime != null" >
+        now(),
+      </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="./src/main/java.pojo.CopInformation" >
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.CopInformation" >
     update Cop_information
     <set >
       <if test="copName != null" >
@@ -93,16 +108,24 @@
       <if test="copImage != null" >
         cop_image = #{copImage,jdbcType=VARCHAR},
       </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = now(),
+      </if>
     </set>
     where cop_id = #{copId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="./src/main/java.pojo.CopInformation" >
+  <update id="updateByPrimaryKey" parameterType="pojo.CopInformation" >
     update Cop_information
     set cop_name = #{copName,jdbcType=VARCHAR},
       cop_number = #{copNumber,jdbcType=TINYINT},
       cop_activity = #{copActivity,jdbcType=TINYINT},
       cop_introduce = #{copIntroduce,jdbcType=VARCHAR},
-      cop_image = #{copImage,jdbcType=VARCHAR}
+      cop_image = #{copImage,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = now()
     where cop_id = #{copId,jdbcType=INTEGER}
   </update>
 </mapper>

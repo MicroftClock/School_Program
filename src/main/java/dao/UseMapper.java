@@ -1,6 +1,6 @@
-package ./src/main/java.pojo;
+package dao;
 
-import ./src/main/java.pojo.Use;
+import pojo.Use;
 
 public interface UseMapper {
     int deleteByPrimaryKey(Integer id);

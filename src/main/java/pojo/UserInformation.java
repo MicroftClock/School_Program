@@ -1,21 +1,17 @@
-package ./src/main/java.pojo;
+package pojo;
 
 import java.util.Date;
 
 public class UserInformation {
-    private Integer userId;
-
     private String username;
 
     private Integer sex;
 
     private String schoolId;
 
-    private String phone;
-
     private String major;
 
-    private Integer activityId;
+    private String activityId;
 
     private Integer corporationId;
 
@@ -23,12 +19,10 @@ public class UserInformation {
 
     private Date updateTime;
 
-    public UserInformation(Integer userId, String username, Integer sex, String schoolId, String phone, String major, Integer activityId, Integer corporationId, Date createTime, Date updateTime) {
-        this.userId = userId;
+    public UserInformation(String username, Integer sex, String schoolId, String major, String activityId, Integer corporationId, Date createTime, Date updateTime) {
         this.username = username;
         this.sex = sex;
         this.schoolId = schoolId;
-        this.phone = phone;
         this.major = major;
         this.activityId = activityId;
         this.corporationId = corporationId;
@@ -38,14 +32,6 @@ public class UserInformation {
 
     public UserInformation() {
         super();
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 
     public String getUsername() {
@@ -72,14 +58,6 @@ public class UserInformation {
         this.schoolId = schoolId == null ? null : schoolId.trim();
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
-    }
-
     public String getMajor() {
         return major;
     }
@@ -88,12 +66,12 @@ public class UserInformation {
         this.major = major == null ? null : major.trim();
     }
 
-    public Integer getActivityId() {
+    public String getActivityId() {
         return activityId;
     }
 
-    public void setActivityId(Integer activityId) {
-        this.activityId = activityId;
+    public void setActivityId(String activityId) {
+        this.activityId = activityId == null ? null : activityId.trim();
     }
 
     public Integer getCorporationId() {

@@ -1,4 +1,4 @@
-package ./src/main/java.pojo;
+package pojo;
 
 import java.util.Date;
 
@@ -7,7 +7,7 @@ public class Activity {
 
     private Integer categoryId;
 
-    private String name;
+    private String activityName;
 
     private String introduce;
 
@@ -15,22 +15,22 @@ public class Activity {
 
     private String subImages;
 
-    private Integer count;
+    private Integer activityCount;
 
-    private Byte status;
+    private Integer status;
 
     private Date createTime;
 
     private Date updateTime;
 
-    public Activity(Integer activityId, Integer categoryId, String name, String introduce, String mainImages, String subImages, Integer count, Byte status, Date createTime, Date updateTime) {
+    public Activity(Integer activityId, Integer categoryId, String activityName, String introduce, String mainImages, String subImages, Integer activityCount, Integer status, Date createTime, Date updateTime) {
         this.activityId = activityId;
         this.categoryId = categoryId;
-        this.name = name;
+        this.activityName = activityName;
         this.introduce = introduce;
         this.mainImages = mainImages;
         this.subImages = subImages;
-        this.count = count;
+        this.activityCount = activityCount;
         this.status = status;
         this.createTime = createTime;
         this.updateTime = updateTime;
@@ -56,12 +56,12 @@ public class Activity {
         this.categoryId = categoryId;
     }
 
-    public String getName() {
-        return name;
+    public String getActivityName() {
+        return activityName;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setActivityName(String activityName) {
+        this.activityName = activityName == null ? null : activityName.trim();
     }
 
     public String getIntroduce() {
@@ -88,19 +88,19 @@ public class Activity {
         this.subImages = subImages == null ? null : subImages.trim();
     }
 
-    public Integer getCount() {
-        return count;
+    public Integer getActivityCount() {
+        return activityCount;
     }
 
-    public void setCount(Integer count) {
-        this.count = count;
+    public void setActivityCount(Integer activityCount) {
+        this.activityCount = activityCount;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
